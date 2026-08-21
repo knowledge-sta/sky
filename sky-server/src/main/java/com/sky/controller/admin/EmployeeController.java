@@ -90,4 +90,11 @@ public class EmployeeController {
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
     }
+
+    @PostMapping("/status/{status}")
+    public Result startOrstop(@PathVariable Integer status, Long id){
+        log.info("启用禁用员工账号：{},{}",status,id);
+        employeeService.startOrstop(status, id);
+        return Result.success();
+    }
 }
