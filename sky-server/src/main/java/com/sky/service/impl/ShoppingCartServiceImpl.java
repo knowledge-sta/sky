@@ -29,6 +29,17 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Autowired
     private SetmealMapper setmealMapper;
 
+    @Override
+    public List<ShoppingCart> showShoppingCart() {
+        //获取当前用户id
+        Long userId = BaseContext.getCurrentId();
+        ShoppingCart shoppingCart = ShoppingCart.builder()
+                .userId(userId)
+                .build();
+        List<ShoppingCart> list = shoppingCartMapper.list(shoppingCart);
+        return list;
+    }
+
     public void addShoppingCart(ShoppingCartDTO shoppingCartDTO) {
         ShoppingCart shoppingCart = new ShoppingCart();
         BeanUtils.copyProperties(shoppingCartDTO, shoppingCart);
@@ -62,6 +73,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             shoppingCartMapper.insert(shoppingCart);
 
         }
+
+
 
 
 
