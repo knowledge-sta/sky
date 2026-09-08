@@ -40,6 +40,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         return list;
     }
 
+
+    public void cleanShoppingCart() {
+        Long userId = BaseContext.getCurrentId();
+        shoppingCartMapper.cleanById(userId);
+    }
+
     public void addShoppingCart(ShoppingCartDTO shoppingCartDTO) {
         ShoppingCart shoppingCart = new ShoppingCart();
         BeanUtils.copyProperties(shoppingCartDTO, shoppingCart);
@@ -73,6 +79,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             shoppingCartMapper.insert(shoppingCart);
 
         }
+
 
 
 
