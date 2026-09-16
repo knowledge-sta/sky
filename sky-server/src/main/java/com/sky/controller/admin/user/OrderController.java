@@ -37,6 +37,9 @@ public class OrderController {
         log.info("订单支付：{}", ordersPaymentDTO);
         OrderPaymentVO orderPaymentVO = orderService.payment(ordersPaymentDTO);
         log.info("生成预支付交易单：{}", orderPaymentVO);
+        //模拟交易成功，修改数据库订单
+        orderService.paySuccess(ordersPaymentDTO.getOrderNumber());
+        log.info("订单支付成功：{}", ordersPaymentDTO.getOrderNumber());
         return Result.success(orderPaymentVO);
     }
 
